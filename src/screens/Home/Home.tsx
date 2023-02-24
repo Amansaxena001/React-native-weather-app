@@ -128,9 +128,6 @@ const Home = () => {
                                             <Text style={[styles.heading2, { fontSize: 30 }]}>
                                                 {weatherDetails?.main?.pressure}
                                             </Text>
-                                            <Text style={styles.bottomText}>
-                                                wind is making it color
-                                            </Text>
                                         </View>
                                         <View style={[styles.detailBox]}>
                                             <View style={styles.row2}>
@@ -147,7 +144,7 @@ const Home = () => {
                                                 {weatherDetails?.main?.humidity}%
                                             </Text>
                                             <Text style={styles.bottomText}>
-                                                wind is making it color
+                                                The dew point is 7° right now
                                             </Text>
                                         </View>
                                         <View style={[styles.detailBox]}>
@@ -164,9 +161,7 @@ const Home = () => {
                                             <Text style={[styles.heading2, { fontSize: 30 }]}>
                                                 {weatherDetails?.wind?.speed} kph
                                             </Text>
-                                            <Text style={styles.bottomText}>
-                                                wind is making it color
-                                            </Text>
+                                            <Text style={styles.bottomText}>soothing breeze</Text>
                                         </View>
                                         <View style={[styles.detailBox]}>
                                             <View style={styles.row2}>
