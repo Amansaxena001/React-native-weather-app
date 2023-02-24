@@ -1,5 +1,7 @@
 # React-native-weather-app
 
+### Clone and install node_modules and you are good to go.
+
 # API
 
 ## OpenWeatherMap
