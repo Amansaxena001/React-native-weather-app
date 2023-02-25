@@ -1,6 +1,6 @@
 import Geolocation from '@react-native-community/geolocation'
 import { useEffect, useRef, useState } from 'react'
-import { PermissionsAndroid, Platform } from 'react-native'
+import { readCurrentLocation, requestLocationPermission } from '../../utils/location'
 import { fetchImageByState, fetchWeatherDetails } from './apis'
 
 export const useCoordinates = () => {
@@ -28,19 +28,25 @@ export const useWeather = () => {
     const { latitude, longitude } = useCoordinates()
     const [weatherDetails, setWeatherDetails] = useState<Record<string, any>>({})
     const [stateImg, setStateImg] = useState<string>('')
+    const [isError, setIsError] = useState<boolean>(false)
+
+    // asking geo permission would be the initial step thats why initial val is true
     const [loading, setLoading] = useState<boolean>(true)
 
-    const getWeatherDetailsByState = async () => {
+    const getWeatherDetailsByState = async (): Promise<void> => {
         try {
             const res = await fetchWeatherDetails(latitude, longitude)
             setWeatherDetails(res)
-        } catch (error) {}
+        } catch (error) {
+            setIsError(error?.message)
+        }
     }
-    const getBackgorundImgyState = async state => {
+    const getBackgorundImgyState = async (state: string): Promise<void> => {
         try {
             const res = await fetchImageByState(state)
             setStateImg(res?.urls?.full)
         } catch (error) {
+            setIsError(error?.message)
         } finally {
             setLoading(false)
         }
@@ -63,35 +69,7 @@ export const useWeather = () => {
         longitude,
         weatherDetails,
         stateImg,
-        loading
-    }
-}
-
-export const readCurrentLocation = callOnSuccess => {
-    Geolocation.getCurrentPosition(
-        position => {
-            callOnSuccess(position)
-        },
-        err => {
-            // logger.log(err)
-        },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-    )
-}
-
-export const requestLocationPermission = async () => {
-    if (Platform.OS === 'android') {
-        try {
-            const permission = await PermissionsAndroid.request(
-                'android.permission.ACCESS_FINE_LOCATION'
-            )
-
-            if (permission === 'granted') {
-                return true
-            }
-            return false
-        } catch (err) {
-            return false
-        }
+        loading,
+        isError
     }
 }

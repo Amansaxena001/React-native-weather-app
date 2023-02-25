@@ -1,17 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState } from 'react'
-import {
-    View,
-    Text,
-    StyleSheet,
-    ImageBackground,
-    Animated,
-    Image,
-    LayoutAnimation
-} from 'react-native'
+import { View, Text, ImageBackground, Animated, Image, LayoutAnimation } from 'react-native'
 
-import { fetchImageByState, fetchWeatherDetails } from './apis'
 import { useWeather } from './hooks'
 import moment from 'moment'
 import Loader from '../../components/loader'

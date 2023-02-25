@@ -1,8 +1,7 @@
-import axios from 'axios'
 import { apiUrls } from '../../api/apis'
 import { apiClient, unsplashApiClient } from '../../api/instance'
 
-export const fetchWeatherDetails = async (lat, long) => {
+export const fetchWeatherDetails = async <T extends Record<string, any>>(lat, long): Promise<T> => {
     try {
         const res = await apiClient.get(apiUrls.weatherInfo('', lat, long))
         return res.data
@@ -12,7 +11,9 @@ export const fetchWeatherDetails = async (lat, long) => {
     }
 }
 
-export const fetchImageByState = async state => {
+export const fetchImageByState = async <T extends Record<string, any>>(
+    state: string
+): Promise<T> => {
     try {
         const res = await unsplashApiClient.get(apiUrls.searchImage(state))
         return res?.data?.results?.[0]
