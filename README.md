@@ -1,5 +1,7 @@
 # React-native-weather-app
 
+This MVP is only made for Android
+
 ### Clone and install node_modules and you are good to go.
 
 # 3rd Party Important Packages
